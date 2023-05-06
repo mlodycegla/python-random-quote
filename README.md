@@ -4,7 +4,9 @@ Returns a random quote and it's author in JSON format.
 /quote
 - **Method:**
 `GET`
-=============
+
+============
+
  - **URL:** 
 /addquote
 - **Method:**
