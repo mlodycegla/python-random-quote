@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 import json
 
-# opening the quotes file, assigning it to a variable for later use
+# opening the quotes file and assigning it to a variable for later use
 with open('quotes.json', "r", encoding='utf-8') as quotesFileForRead:
   quotesObject = json.load(quotesFileForRead)
 
@@ -12,22 +12,22 @@ addquote_blueprint = Blueprint("addquote", __name__)
 @addquote_blueprint.route('/addquote', methods=['POST'])
 def addquote():
     # assigning user input to variable
-    requestjson = request.get_json()
+    userInputJson = request.get_json()
     # checking if user input is empty
-    if requestjson == {}:
+    if userInputJson == {}:
         return status_codes[400], 400
     # checking if user input has quote key and author key
-    if "quote" not in requestjson or "author" not in requestjson:
+    if "quote" not in userInputJson or "author" not in userInputJson:
         return status_codes[400], 400
     # checking if the values for keys are empty
-    if requestjson["quote"] == "" or requestjson["author"] == "":
+    if userInputJson["quote"] == "" or userInputJson["author"] == "":
         return status_codes[400], 400
     
     # initialazing newquote variable
     newquote = {}
     # assigning user input to the variable
-    newquote["quote"] = requestjson["quote"]
-    newquote["author"] = requestjson["author"]
+    newquote["quote"] = userInputJson["quote"]
+    newquote["author"] = userInputJson["author"]
     # appending the new quote to json object from quotes file
     quotesObject["quotes"].append(newquote)
     # trying to add the new quote to the quotes file
