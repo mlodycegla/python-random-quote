@@ -1,4 +1,3 @@
-# importing app and a variable containing the quotes from the main file
 from flask import Blueprint
 import random, json
 
@@ -10,6 +9,8 @@ with open('quotes.json', "r", encoding='utf-8') as quotesFile:
 getquote_blueprint = Blueprint("getquote", __name__)
 @getquote_blueprint.route('/quote', methods=['GET'])
 def quote():
+    # defining the lenght of quotes array which is located in the file 
     quotesLength = len(quotesObject["quotes"])
+    # getting a random quote within the range of the array and returning it
     quotesRange = random.randint(0, quotesLength - 1)
     return quotesObject['quotes'][quotesRange], 200

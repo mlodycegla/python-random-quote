@@ -5,7 +5,7 @@ import json
 with open('quotes.json', "r", encoding='utf-8') as quotesFileForRead:
   quotesObject = json.load(quotesFileForRead)
 
-status_codes = {400: "400 Bad request", 200: "Ok"}
+status_codes = {500: "500 Internal server error", 400: "400 Bad request", 200: "Ok"}
 
 # defining the POST route for adding new user created quotes to the database
 addquote_blueprint = Blueprint("addquote", __name__)
@@ -34,7 +34,9 @@ def addquote():
     try:
         # opening quotes file for writing new quotes to it
         quotesFileForWrite = open('quotes.json', "w", encoding='utf-8')
+        # adding new quote to the file and returning code 200 if successful
         json.dump(quotesObject, quotesFileForWrite)
         return status_codes[200]
     except Exception as error:
-        return status_codes[400], + f": {error}", 400
+        # if this failed returns code 500 for internal server error and the exception
+        return status_codes[500], + f": {error}", 500
