@@ -2,7 +2,6 @@
 
 Py-quote API is a Python Flask API which returns randomly chosen quotes and allows the user to add more quotes to the database.
 
-
 # Installation
 
 ```
@@ -15,9 +14,14 @@ $ pip install -r requirements.txt
 
 - **URL:** /quote
 - **Method:** `GET`
+
+  | URL | Method | Data Params |
+  | --- | --- | --- |
+  | /quote | `GET` | ----------------------------------------------- |
+  | /addquote | `POST` | `{ 'author': 'the author of the quote', 'quote': 'the quote' }` |
+
 - **URL:** /addquote
 - **Method:** `POST`
 - **Data Params:** `{ 'author': 'the author of the quote', 'quote': 'the quote' }`
-
 
 Quotes from https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80
