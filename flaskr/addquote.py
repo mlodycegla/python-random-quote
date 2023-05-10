@@ -1,8 +1,8 @@
 from flask import Blueprint, request
-import json
+import json, os
 
 # opening the quotes file and assigning it to a variable for later use
-with open('quotes.json', "r", encoding='utf-8') as quotesFileForRead:
+with open(os.path.abspath("../flaskr/quotes.json"), "r", encoding='utf-8') as quotesFileForRead:
   quotesObject = json.load(quotesFileForRead)
 
 status_codes = {500: "500 Internal server error", 400: "400 Bad request", 200: "Ok"}
@@ -13,14 +13,8 @@ addquote_blueprint = Blueprint("addquote", __name__)
 def addquote():
     # assigning user input to variable
     userInputJson = request.get_json()
-    # checking if user input is empty
-    if userInputJson == {}:
-        return status_codes[400], 400
-    # checking if user input has quote key and author key
-    if "quote" not in userInputJson or "author" not in userInputJson:
-        return status_codes[400], 400
-    # checking if the values for keys are empty
-    if userInputJson["quote"] == "" or userInputJson["author"] == "":
+    # checking if user input is empty, has quote and author keys and if the values for the keys are empty
+    if not userInputJson or not all(key in userInputJson for key in ["quote", "author"]) or any(not userInputJson[key] for key in ["quote", "author"]):
         return status_codes[400], 400
     
     # initialazing newquote variable

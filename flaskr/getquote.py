@@ -1,8 +1,8 @@
 from flask import Blueprint
-import random, json
+import random, json, os
 
 # opening the quotes file and assigning it to a variable for later use
-with open('quotes.json', "r", encoding='utf-8') as quotesFile:
+with open(os.path.abspath("../flaskr/quotes.json"), "r", encoding='utf-8') as quotesFile:
   quotesObject = json.load(quotesFile)
 
 # defining the GET route which returns a random quote and it's author
