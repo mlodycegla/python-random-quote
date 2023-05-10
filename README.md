@@ -16,7 +16,7 @@ To launch the API for development:
 
 ```
 $ cd flaskr
-$ python __init__.py
+$ flask --app flaskr run --debug
 ```
 
 # Methods
