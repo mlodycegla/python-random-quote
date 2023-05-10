@@ -30,7 +30,7 @@ def addquote():
         quotesFileForWrite = open('quotes.json', "w", encoding='utf-8')
         # adding new quote to the file and returning code 200 if successful
         json.dump(quotesObject, quotesFileForWrite)
-        return status_codes[200]
+        return status_codes[200], 200
     except Exception as error:
         # if this failed returns code 500 for internal server error and the exception
         return status_codes[500], + f": {error}", 500
