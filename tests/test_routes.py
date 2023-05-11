@@ -12,12 +12,10 @@ def test_get_route():
     client = app.test_client()
     url = '/quote'
 
-    # assigning response data to variable
+    # getting the response from API
     response = client.get(url)
 
-    # testing if author and quote keys are in the response
     assert b"author" in response.get_data() and b"quote" in response.get_data()
-    # testing if the response status code is 200
     assert response.status_code == 200
 
 def test_post_route():
@@ -29,13 +27,11 @@ def test_post_route():
 
     url = '/addquote'
 
-    # defining data to POST
+    # mock data for POST request
     quoteData = {
         "author": "test",
         "quote": "test quote"
     }
 
-    # sending the POST request
     response = client.post(url, data=json.dumps(quoteData), mimetype="application/json")
-    # testing if the request was successful by checking if status code is 200
     assert response.status_code == 200

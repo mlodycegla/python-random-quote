@@ -1,5 +1,4 @@
 from flask import Flask
-# importing the blueprints from seperate files
 from getquote import getquote_blueprint
 from addquote import addquote_blueprint
 
