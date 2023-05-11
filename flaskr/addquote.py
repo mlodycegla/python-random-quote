@@ -25,6 +25,6 @@ def addquote():
     try:
         quotesFileForWrite = open('quotes.json', "w", encoding='utf-8')
         json.dump(quotesObject, quotesFileForWrite)
-        return status_codes[200]
+        return status_codes[200], 200
     except Exception as error:
         return f"{error} ", status_codes[500]
