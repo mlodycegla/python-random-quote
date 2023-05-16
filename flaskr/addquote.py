@@ -1,10 +1,10 @@
 from flask import Blueprint, request
 import json, os
 
-with open(os.path.abspath("../flaskr/quotes.json"), "r", encoding='utf-8') as quotesFileForRead:
+with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'quotes.json')), "r", encoding='utf-8') as quotesFileForRead:
   quotesObject = json.load(quotesFileForRead)
 
-status_codes = {500: ("<b>500 Internal server error<b>", 500), 400: ("<b>400 Bad request</b>", 400), 200: ("Ok", 200)}
+status_codes = {500: ("<b>500 Internal server error<b>", 500), 400: ("<b>400 Bad request</b>", 400), 200: ("<b>Ok</b>", 200)}
 
 # defining the POST route for adding new user created quotes to the database
 addquote_blueprint = Blueprint("addquote", __name__)
