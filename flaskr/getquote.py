@@ -1,14 +1,14 @@
 from flask import Blueprint
-import random, json, os
-
-with open(os.path.abspath("../flaskr/quotes.json"), "r", encoding='utf-8') as quotesFile:
-  quotesObject = json.load(quotesFile)
+from init_db import get_db_connection
 
 # defining the GET route which returns a random quote and it's author
 getquote_blueprint = Blueprint("getquote", __name__)
 @getquote_blueprint.route('/quote', methods=['GET'])
 def quote():
-    # getting a random quote and returning
-    quotesLength = len(quotesObject["quotes"])
-    quotesRange = random.randint(0, quotesLength - 1)
-    return quotesObject['quotes'][quotesRange], 200
+    # getting a random quote from database and returning
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM quotes ORDER BY RANDOM() LIMIT 1")
+    quote = cursor.fetchone()
+    formattedQuote = {"author": quote[0], "quote": quote[1]}
+    return formattedQuote, 200
