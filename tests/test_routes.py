@@ -3,6 +3,7 @@ import sys, json
 sys.path.append("../flaskr")
 from getquote import getquote_blueprint
 from addquote import addquote_blueprint
+from init_db import get_db_connection
 
 
 def test_get_route():
@@ -35,3 +36,10 @@ def test_post_route():
 
     response = client.post(url, data=json.dumps(quoteData), mimetype="application/json")
     assert response.status_code == 200
+
+def test_db_connection():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    # testing if select and insert works with mock data
+    cursor.execute("SELECT * FROM quotes")
+    cursor.execute("INSERT INTO quotes (author, quote) VALUES ('test', 'quote')")
