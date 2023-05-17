@@ -1,10 +1,12 @@
 import sqlite3, json
 
+# connecting to database and checking if the table is empty
 connection = sqlite3.connect("./instance/flaskr.sqlite")
 cursor = connection.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS quotes (author, quote)")
 cursor.execute("SELECT COUNT(*) FROM quotes")
 
+# populating the table if it was empty
 if(cursor.fetchone()[0] == 0):
      quotesFile = json.load(open("./quotes.json"))
      columns = ["author", "quote"]
